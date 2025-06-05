@@ -1,4 +1,3 @@
-
 from markdown2pdf import MarkdownPDF
 
 def pay(offer):
@@ -7,5 +6,5 @@ def pay(offer):
     input("Press Enter when paid...")
 
 client = MarkdownPDF(on_payment_request=pay)
-path = client.convert("# Save this one", download_path="output.pdf")
+path = client.convert("# Save this one", download_path="output.pdf") # Replace with your own unique markdown content to ensure you trigger L402.
 print("Saved PDF to:", path)

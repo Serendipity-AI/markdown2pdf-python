@@ -1,4 +1,3 @@
-
 from markdown2pdf import MarkdownPDF
 
 def pay(offer):
