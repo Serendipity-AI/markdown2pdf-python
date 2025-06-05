@@ -7,6 +7,6 @@ setup(
     packages=find_packages(),
     install_requires=["requests"],
     author="Serendipity AI",
-    description="Convert Markdown to PDF with L402 Lightning support",
+    description="Convert Markdown to PDF with L402 Lightning support, brought to you by markdown2pdf.ai",
     license="MIT",
 )
