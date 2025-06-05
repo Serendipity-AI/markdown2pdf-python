@@ -22,13 +22,17 @@ pip install markdown2pdf
 ## Usage
 
 ```python
+
 from markdown2pdf import MarkdownPDF
 
 def pay(offer):
-    print("Invoice:", offer["payment_request"])
-    input("Press Enter when paid...")
+    print("⚡ Lightning payment required")
+    print(f"Amount: {offer['amount']} {offer['currency']}")
+    print(f"Description: {offer['description']}")
+    print(f"Invoice: {offer['payment_request']}")
+    input("Press Enter once paid...")
 
 client = MarkdownPDF(on_payment_request=pay)
-url = client.convert("# Hello")
-print(url)
+path = client.convert("# Save this one", download_path="output.pdf")
+print("Saved PDF to:", path)
 ```
