@@ -3,10 +3,10 @@ from dotenv import load_dotenv
 from pyalby import Account, Invoice, Payment
 
 load_dotenv()
-# In your .env file, ensure you have set the following:
+# In your .env file, ensure you have set the following. You can learn more about alby at https://albyhub.com.
 # BASE_URL = https://api.getalby.com
 # ALBY_ACCESS_TOKEN = <your_alby_access_token>
-# LOG_LEVEL = INFO
+# LOG_LEVEL = INF
 
 def pay(offer):
     print("Paying using Alby:")
