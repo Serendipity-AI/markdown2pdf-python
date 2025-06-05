@@ -13,7 +13,7 @@ class MarkdownPDF:
         self.on_payment_request = on_payment_request
         self.poll_interval = poll_interval
 
-    def convert(self, markdown, download_path=None, document_name="converted.pdf", return_bytes=False):
+    def convert(self, markdown, download_path=None, return_bytes=False):
         payload = {
             "data": {
                 "text_body": markdown,
@@ -23,7 +23,7 @@ class MarkdownPDF:
                 }
             },
             "options": {
-                "document_name": document_name
+                "document_name": "converted.pdf"
             }
         }
 
