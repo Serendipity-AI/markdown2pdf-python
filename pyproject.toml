@@ -1,0 +1,14 @@
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "markdown2pdf"
+version = "0.1.0"
+description = "Convert Markdown to PDF with L402 Lightning support"
+authors = [{name = "Serendipity AI"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.7"
+dependencies = ["requests"]
