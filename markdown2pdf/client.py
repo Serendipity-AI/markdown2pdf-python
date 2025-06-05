@@ -69,8 +69,6 @@ class MarkdownPDF:
             path = response.json()["path"]
             break
 
-        print("Generating your PDF...")
-
         # Step 1: Poll until status is "Done"
         status_url = self._build_url(path)
         while True:
