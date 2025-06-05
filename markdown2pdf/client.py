@@ -13,12 +13,12 @@ class MarkdownPDF:
         self.on_payment_request = on_payment_request
         self.poll_interval = poll_interval
 
-    def convert(self, markdown, download_path=None, return_bytes=False):
+    def convert(self, markdown, title="Markdown2PDF.ai converted document", download_path=None, return_bytes=False):
         payload = {
             "data": {
                 "text_body": markdown,
                 "meta": {
-                    "title": "Generated Document",
+                    "title": title,
                     "date": datetime.now(timezone.utc).isoformat()
                 }
             },
