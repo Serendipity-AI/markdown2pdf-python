@@ -1,4 +1,3 @@
-
 class Markdown2PDFException(Exception):
     pass
 
