@@ -6,5 +6,5 @@ def pay(offer):
     input()
 
 client = MarkdownPDF(on_payment_request=pay)
-pdf_bytes = client.convert("# Memory use case", return_bytes=True) # Replace with your own unique markdown content to ensure you trigger L402.
+pdf_bytes = client.convert(markdown="# Memory use case", return_bytes=True) # Replace with your own unique markdown content to ensure you trigger L402.
 print(f"PDF size in memory: {len(pdf_bytes)} bytes")

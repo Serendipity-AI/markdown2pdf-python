@@ -15,5 +15,5 @@ def pay(offer):
     print(f"Payment made: {pay}")
 
 client = MarkdownPDF(on_payment_request=pay)
-path = client.convert("# Save this one using Alby", download_path="output.pdf") # Replace with your own unique markdown content to ensure you trigger L402.
+path = client.convert(markdown="# Save this one using Alby", download_path="output.pdf") # Replace with your own unique markdown content to ensure you trigger L402.
 print("Saved PDF to:", path)

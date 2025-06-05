@@ -32,6 +32,6 @@ def pay(offer):
     input("Press Enter once paid...")
 
 client = MarkdownPDF(on_payment_request=pay)
-path = client.convert("# Save this one", download_path="output.pdf")
+path = client.convert(markdown="# Save this one", title="My document title", download_path="output.pdf")
 print("Saved PDF to:", path)
 ```

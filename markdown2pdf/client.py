@@ -2,6 +2,7 @@ import time
 import requests
 from datetime import datetime, timezone
 from urllib.parse import urljoin
+from datetime import datetime
 from .exceptions import PaymentRequiredException, Markdown2PDFException
 
 DEFAULT_API_URL = "https://api.markdown2pdf.ai"
@@ -13,13 +14,18 @@ class MarkdownPDF:
         self.on_payment_request = on_payment_request
         self.poll_interval = poll_interval
 
-    def convert(self, markdown, title="Markdown2PDF.ai converted document", download_path=None, return_bytes=False):
+    def convert(self, markdown, date=None, title="Markdown2PDF.ai converted document", download_path=None, return_bytes=False):
+        
+        if not date:
+            dt = datetime.now()
+            date = f"{dt.day} {dt.strftime('%B %Y')}"
+        
         payload = {
             "data": {
                 "text_body": markdown,
                 "meta": {
                     "title": title,
-                    "date": datetime.now(timezone.utc).isoformat()
+                    "date": date,
                 }
             },
             "options": {
