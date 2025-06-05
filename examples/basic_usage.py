@@ -8,5 +8,5 @@ def pay(offer):
     input("Press Enter once paid...")
 
 client = MarkdownPDF(api_url="https://qa.api.markdown2pdf.ai", on_payment_request=pay)
-url = client.convert(markdown="# Hello markdown2pdf", title="My document title" ) # Replace with your own unique markdown content to ensure you trigger L402.
+url = client.convert(markdown="# Hello markdown2pdf", title="My document title", date="5th June 2025" ) # Replace with your own unique markdown content to ensure you trigger L402.
 print("PDF URL:", url)
