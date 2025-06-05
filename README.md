@@ -10,8 +10,7 @@ Here’s the output of a markdown file converted to PDF format, showing cover pa
 
 <img src="images/examples.png" />
 
-This package provides MCP server support for clients such as Claude Desktop. You can read full instructions on how to configure Claude in [our documentation](https://markdown2pdf.ai/mcp).
-
+This package provides a python client for the markdown2pdf.ai service. You can read full instructions in [our documentation](https://markdown2pdf.ai).
 
 ## Installation
 
