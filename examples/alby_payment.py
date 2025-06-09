@@ -6,7 +6,7 @@ load_dotenv()
 # In your .env file, ensure you have set the following. You can learn more about alby at https://albyhub.com.
 # BASE_URL = https://api.getalby.com
 # ALBY_ACCESS_TOKEN = <your_alby_access_token>
-# LOG_LEVEL = INF
+# LOG_LEVEL = INFO
 
 def pay(offer):
     print("Paying using Alby:")

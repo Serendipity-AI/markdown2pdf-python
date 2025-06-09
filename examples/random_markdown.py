@@ -1,0 +1,65 @@
+from openai import OpenAI
+import os
+import random
+from markdown2pdf import MarkdownPDF
+from dotenv import load_dotenv
+from pyalby import Account, Invoice, Payment
+
+load_dotenv()
+# In your .env file, ensure you have set the following. You can learn more about alby at https://albyhub.com.
+# BASE_URL = https://api.getalby.com
+# ALBY_ACCESS_TOKEN = <your_alby_access_token>
+# LOG_LEVEL = INFO
+# OPENAI_API_KEY = <your_openai_api_key>
+client = OpenAI() 
+
+def generate_random_markdown(topic=None):
+    if topic is None:
+        topic = random.choice([
+            "How to Brew the Perfect Cup of Coffee",
+            "Beginner's Guide to Python",
+            "A Travelogue on Iceland",
+            "The History of the Internet",
+            "Understanding Quantum Mechanics"
+        ])
+
+    prompt = f"""
+You are a Markdown-savvy technical writer.
+Write a simple and well-formatted markdown document on the topic: **{topic}**.
+Include:
+- Headings
+- Bullet points
+- Numbered lists
+- Blockquotes
+- Emphasis (bold/italic)
+- Links and inline images (use placeholders)
+
+Do not prefix or suffix the content with any additional text; be sure to ONLY output markdown content.
+Start now.
+"""
+
+    response = client.chat.completions.create(model="gpt-4o",
+    messages=[
+        {"role": "system", "content": "You are a helpful Markdown generator."},
+        {"role": "user", "content": prompt}
+    ],
+    temperature=0.1,
+    max_tokens=1500)
+
+    markdown_text = response.choices[0].message.content
+    return markdown_text
+
+if __name__ == "__main__":
+
+    md = generate_random_markdown()
+    print(f"Generated Markdown Content: {md}")
+
+    def pay(offer):
+        print("Paying using Alby:")
+        payment = Payment()
+        pay = payment.bolt11_payment(offer["payment_request"])
+        print(f"Payment made: {pay}")
+
+    client = MarkdownPDF(on_payment_request=pay)
+    path = client.convert(md, download_path="output.pdf")
+    print("Saved PDF to:", path)
