@@ -11,7 +11,7 @@ load_dotenv()
 # ALBY_ACCESS_TOKEN = <your_alby_access_token>
 # LOG_LEVEL = INFO
 # OPENAI_API_KEY = <your_openai_api_key>
-client = OpenAI() 
+openai_client = OpenAI() 
 
 def generate_random_markdown(topic=None):
     if topic is None:
@@ -32,13 +32,16 @@ Include:
 - Numbered lists
 - Blockquotes
 - Emphasis (bold/italic)
+- Emjois
+- Code blocks if appropriate
 - Links and inline images (use placeholders)
 
 Do not prefix or suffix the content with any additional text; be sure to ONLY output markdown content.
+NEVER enclose the markdown content in triple backticks or any other code block format.
 Start now.
 """
 
-    response = client.chat.completions.create(model="gpt-4o",
+    response = openai_client.chat.completions.create(model="gpt-4o",
     messages=[
         {"role": "system", "content": "You are a helpful Markdown generator."},
         {"role": "user", "content": prompt}
