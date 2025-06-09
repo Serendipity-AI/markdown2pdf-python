@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 pyalby = "*"
 dotenv = "*"
+fewsats = "*"
 
 [dev-packages]
 
