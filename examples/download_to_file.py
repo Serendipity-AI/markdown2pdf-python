@@ -5,6 +5,6 @@ def pay(offer):
     print(offer["payment_request"])
     input("Press Enter when paid...")
 
-client = MarkdownPDF(on_payment_request=pay)
+client = MarkdownPDF(on_payment_request=pay, verify_ssl=False)
 path = client.convert(markdown="# Save this one", download_path="output.pdf") # Replace with your own unique markdown content to ensure you trigger L402.
 print("Saved PDF to:", path)

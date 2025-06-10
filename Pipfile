@@ -7,6 +7,10 @@ name = "pypi"
 pyalby = "*"
 dotenv = "*"
 fewsats = "*"
+openai = "*"
+aiohttp = "*"
+langchain = "*"
+langchain-openai = "*"
 
 [dev-packages]
 

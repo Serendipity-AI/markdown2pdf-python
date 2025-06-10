@@ -63,6 +63,6 @@ if __name__ == "__main__":
         pay = payment.bolt11_payment(offer["payment_request"])
         print(f"Payment made: {pay}")
 
-    client = MarkdownPDF(on_payment_request=pay)
+    client = MarkdownPDF(on_payment_request=pay, verify_ssl=False)
     path = client.convert(md, download_path="output.pdf")
     print("Saved PDF to:", path)
