@@ -8,9 +8,9 @@ fs = Fewsats()
 
 def pay(offer):
     print("Paying using Fewsats:")
-    r = fs.pay_lightning(invoice=offer["payment_request"], amount=1)
+    r = fs.pay_lightning(invoice=offer["payment_request"], amount=offer["amount"], currency=offer["currency"], description=offer["description"])
     print(f"Payment made: {r}")
 
-client = MarkdownPDF(on_payment_request=pay)
+client = MarkdownPDF(api_url="https://qa.api.markdown2pdf.ai", on_payment_request=pay)
 path = client.convert(markdown="# Save this one using Fewsats", download_path="output.pdf") # Replace with your own unique markdown content to ensure you trigger L402.
 print("Saved PDF to:", path)
