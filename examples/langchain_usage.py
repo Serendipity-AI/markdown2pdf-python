@@ -1,10 +1,11 @@
 import asyncio
 from langchain.tools import tool
+from dotenv import load_dotenv
 from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
-from dotenv import load_dotenv
 from markdown2pdf import AsyncMarkdownPDF
+
 load_dotenv()
 
 async def pay(offer):
@@ -39,7 +40,7 @@ async def main():
         if user_input.lower() in ['quit', 'exit']:
             break
             
-        result = await agent_executor.ainvoke({"input": user_input})
+        result = await agent_executor.ainvoke({"input": user_input}) 
         print("Assistant:", result["output"])
 
 asyncio.run(main())
