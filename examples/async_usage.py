@@ -12,7 +12,7 @@ async def async_pay(offer):
     input("Press Enter once paid...")
 
 async def main():
-    client = AsyncMarkdownPDF(on_payment_request=async_pay, verify_ssl=False)
+    client = AsyncMarkdownPDF(on_payment_request=async_pay)
     url = await client.convert(markdown="# Hello markdown2pdf async", title="My document title", date="5th June 2025")
     print("PDF URL:", url)
 

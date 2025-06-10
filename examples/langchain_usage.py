@@ -17,7 +17,7 @@ async def pay(offer):
 @tool
 async def convert_to_pdf(markdown: str) -> str:
     """Convert markdown to PDF"""
-    client = AsyncMarkdownPDF(on_payment_request=pay, verify_ssl=False)
+    client = AsyncMarkdownPDF(on_payment_request=pay)
     return await client.convert(markdown=markdown, title="LangChain PDF")
 
 async def main():

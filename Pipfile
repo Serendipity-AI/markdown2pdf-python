@@ -8,9 +8,9 @@ pyalby = "*"
 dotenv = "*"
 fewsats = "*"
 openai = "*"
-aiohttp = "*"
 langchain = "*"
 langchain-openai = "*"
+httpx = "*"
 
 [dev-packages]
 
