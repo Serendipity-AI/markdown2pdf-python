@@ -1,18 +1,36 @@
-[build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "markdown2pdf-python"
-version = "0.1.0"
+version = "0.1.4"
 description = "Convert Markdown to PDF with L402 Lightning support, brought to you by markdown2pdf.ai"
-authors = [{name = "Serendipity AI"}]
-license = {text = "MIT"}
+authors = [{ name = "Serendipity AI" }]
+requires-python = ">=3.10"
 readme = "README.md"
-requires-python = ">=3.7"
-dependencies = ["requests"]
+license = { text = "MIT" }
+dependencies = [
+    "dotenv>=0.9.9",
+    "fewsats>=0.0.22",
+    "httpx>=0.24.1",
+    "langchain>=0.3.25",
+    "openai>=1.86.0",
+    "pyalby>=0.0.1",
+    "requests",
+]
 
 [project.urls]
 Homepage = "https://markdown2pdf.ai"
 Documentation = "https://markdown2pdf.ai"
 Repository = "https://github.com/Serendipity-AI/markdown2pdf-python"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = []
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
