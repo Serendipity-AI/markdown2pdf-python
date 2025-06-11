@@ -1,18 +1,14 @@
 [project]
 name = "markdown2pdf-python"
-version = "0.1.4"
+version = "0.1.6"
 description = "Convert Markdown to PDF with L402 Lightning support, brought to you by markdown2pdf.ai"
 authors = [{ name = "Serendipity AI" }]
-requires-python = ">=3.10"
+requires-python = ">=3.7"
 readme = "README.md"
 license = { text = "MIT" }
 dependencies = [
     "dotenv>=0.9.9",
-    "fewsats>=0.0.22",
     "httpx>=0.24.1",
-    "langchain>=0.3.25",
-    "openai>=1.86.0",
-    "pyalby>=0.0.1",
     "requests",
 ]
 

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="markdown2pdf-python",
-    version="0.1.4",
+    version="0.1.6",
     packages=find_packages(),
     install_requires=["requests"],
     author="Serendipity AI",
