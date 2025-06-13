@@ -20,7 +20,13 @@ def generate_random_markdown(topic=None):
             "Beginner's Guide to Python",
             "A Travelogue on Iceland",
             "The History of the Internet",
-            "Understanding Quantum Mechanics"
+            "Understanding Quantum Mechanics",
+            "The jazz music of Herbie Hancock",
+            "Bitcoin and the Future of Money",
+            "Future payment protocols for AI agents",
+            "Living in Primrose Hill",
+            "Einsteins Theory of Relativity",
+            "Learning simple Chinese phrases",
         ])
 
     prompt = f"""
@@ -33,11 +39,14 @@ Include:
 - Blockquotes
 - Emphasis (bold/italic)
 - Emjois
-- Code blocks if appropriate
-- Links and inline images (use placeholders)
+- Code blocks if appropriate,
+- Formulae/equations if appropriate,
+- Images using linksto images you know exist online,
+- Links
 
 Do not prefix or suffix the content with any additional text; be sure to ONLY output markdown content.
 NEVER enclose the markdown content in triple backticks or any other code block format.
+Be very verbose, we are aiming for a lot of content.
 Start now.
 """
 
@@ -47,22 +56,31 @@ Start now.
         {"role": "user", "content": prompt}
     ],
     temperature=0.1,
-    max_tokens=1500)
+    max_tokens=16000)
 
     markdown_text = response.choices[0].message.content
     return markdown_text
 
 if __name__ == "__main__":
 
-    md = generate_random_markdown()
-    print(f"Generated Markdown Content: {md}")
+    for i in range(50):
+        md = generate_random_markdown()
+        print(f"Generated Markdown Content: {md}")
 
-    def pay(offer):
-        print("Paying using Alby:")
-        payment = Payment()
-        pay = payment.bolt11_payment(offer["payment_request"])
-        print(f"Payment made: {pay}")
+        def pay(offer):
+            print("Paying using Alby:")
+            payment = Payment()
+            pay = payment.bolt11_payment(offer["payment_request"])
+            print(f"Payment made: {pay}")
 
-    client = MarkdownPDF(on_payment_request=pay)
-    path = client.convert(md, download_path="output.pdf")
-    print("Saved PDF to:", path)
+        client = MarkdownPDF(on_payment_request=pay)
+        try: 
+            path = client.convert(md, download_path=f"output-{i}.pdf")
+            print("Saved PDF to:", path)
+            with open(f"PASS-random_markdown_{i}.md", "w") as f:
+                f.write(md)
+        except Exception as e:
+            print(f"Error converting markdown to PDF for document {i}: {e}")
+            with open(f"FAIL-random_markdown_{i}.md", "w") as f:
+                f.write(md)
+            continue
