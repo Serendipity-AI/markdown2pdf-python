@@ -1,13 +1,32 @@
+[project]
+name = "markdown2pdf-python"
+version = "0.1.10"
+description = "⚡ Python client for markdown2pdf.ai - Convert markdown to PDF with Lightning payments"
+authors = [{ name = "Serendipity AI" }]
+requires-python = ">=3.7"
+readme = "README.md"
+license = { text = "MIT" }
+dependencies = [
+    "dotenv>=0.9.9",
+    "httpx>=0.24.1",
+    "requests",
+]
+
+[project.urls]
+Homepage = "https://markdown2pdf.ai"
+Documentation = "https://markdown2pdf.ai"
+Repository = "https://github.com/Serendipity-AI/markdown2pdf-python"
+
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[project]
-name = "markdown2pdf"
-version = "0.1.0"
-description = "Convert Markdown to PDF with L402 Lightning support, brought to you by markdown2pdf.ai"
-authors = [{name = "Serendipity AI"}]
-license = {text = "MIT"}
-readme = "README.md"
-requires-python = ">=3.7"
-dependencies = ["requests"]
+[dependency-groups]
+dev = []
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pypi"
+url = "https://pypi.org/simple"
