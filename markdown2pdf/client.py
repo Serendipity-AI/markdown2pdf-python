@@ -7,6 +7,7 @@ from .exceptions import PaymentRequiredException, Markdown2PDFException
 
 DEFAULT_API_URL = "https://api.markdown2pdf.ai"
 POLL_INTERVAL = 3
+MAX_DOC_GENERATION_POLLS = 10 
 
 class MarkdownPDF:
     def __init__(self, api_url=DEFAULT_API_URL, on_payment_request=None, poll_interval=POLL_INTERVAL):
@@ -74,33 +75,35 @@ class MarkdownPDF:
             path = response.json()["path"]
             break
 
-        # Step 1: Poll until status is "Done"
         status_url = self._build_url(path)
-        while True:
+        attempt = 0
+
+        while attempt < MAX_DOC_GENERATION_POLLS:
             poll_resp = requests.get(status_url)
             if poll_resp.status_code != 200:
-                raise Markdown2PDFException("Polling error")
+                raise Markdown2PDFException(f"Polling error (status {poll_resp.status_code})")
 
             poll_data = poll_resp.json()
-            if poll_data.get("status") != "Done":
-                time.sleep(self.poll_interval)
-                continue
+            if poll_data.get("status") == "Done":
+                final_metadata_url = poll_data.get("path")
+                if not final_metadata_url:
+                    raise Markdown2PDFException("Missing 'path' field pointing to final metadata.")
 
-            # Step 2: Use the returned 'path' field to retrieve final metadata
-            final_metadata_url = poll_data.get("path")
-            if not final_metadata_url:
-                raise Markdown2PDFException("Missing 'path' field pointing to final metadata.")
+                metadata_resp = requests.get(final_metadata_url)
+                if not metadata_resp.ok:
+                    raise Markdown2PDFException("Failed to retrieve metadata at final path.")
 
-            metadata_resp = requests.get(final_metadata_url)
-            if not metadata_resp.ok:
-                raise Markdown2PDFException("Failed to retrieve metadata at final path.")
+                final_data = metadata_resp.json()
+                if "url" not in final_data:
+                    raise Markdown2PDFException("Missing final download URL in metadata response.")
 
-            final_data = metadata_resp.json()
-            if "url" not in final_data:
-                raise Markdown2PDFException("Missing final download URL in metadata response.")
+                final_download_url = final_data["url"]
+                break
 
-            final_download_url = final_data["url"]
-            break
+            time.sleep(self.poll_interval)
+            attempt += 1
+        else:
+            raise Markdown2PDFException(f"Polling exceeded max attempts ({MAX_DOC_GENERATION_POLLS}) without completion.")
 
         # Step 3: Download the actual PDF
         pdf_resp = requests.get(final_download_url)
