@@ -34,15 +34,21 @@ You are a Markdown-savvy technical writer.
 Write a simple and well-formatted markdown document on the topic: **{topic}**.
 Include:
 - Headings
-- Bullet points
-- Numbered lists
+- Bullet points (be use to have a blank line prior to the first bullet point)
+- Numbered lists (be use to have a blank line prior to the first bullet point)
 - Blockquotes
 - Emphasis (bold/italic)
 - Emjois
 - Code blocks if appropriate,
-- Formulae/equations if appropriate,
-- Images using linksto images you know exist online,
-- Links
+- Formulae/equations if appropriate. Be sure to use markdown syntax, for example:
+  $$
+  E = mc^2 
+  $$
+  For inline equations or math formatting, use:
+  $E = mc^2$
+  If you are listing bullet points after a Where clause, use a blank line before the first bullet point.
+- Images using links to images you know exist online
+- Hyperlinks
 
 Do not prefix or suffix the content with any additional text; be sure to ONLY output markdown content.
 NEVER enclose the markdown content in triple backticks or any other code block format.
