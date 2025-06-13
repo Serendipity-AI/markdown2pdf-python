@@ -1,6 +1,6 @@
 [project]
 name = "markdown2pdf-python"
-version = "0.1.7"
+version = "0.1.10"
 description = "⚡ Python client for markdown2pdf.ai - Convert markdown to PDF with Lightning payments"
 authors = [{ name = "Serendipity AI" }]
 requires-python = ">=3.7"
