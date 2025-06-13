@@ -15,7 +15,7 @@ This package provides a python client for the markdown2pdf.ai service. You can r
 ## Installation
 
 ```
-pip install markdown2pdf
+pip install markdown2pdf-python
 ```
 
 ## Usage
