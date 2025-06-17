@@ -133,7 +133,7 @@ def convert(markdown, title="Markdown2PDF.ai converted document", date=None, dow
 # Example usage
 if __name__ == "__main__":
     url = convert(
-        markdown="# Hello markdown2pdf new test",
+        markdown="# Hello markdown2pdf REST APIs",
         title="My document title",
         date="5th June 2025"
     )
