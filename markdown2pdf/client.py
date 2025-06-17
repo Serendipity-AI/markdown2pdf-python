@@ -7,9 +7,9 @@ from urllib.parse import urljoin
 from datetime import datetime
 from .exceptions import PaymentRequiredException, Markdown2PDFException
 
-DEFAULT_API_URL = "https://api.markdown2pdf.ai"
-POLL_INTERVAL = 3
-MAX_DOC_GENERATION_POLLS = 10
+DEFAULT_API_URL = "https://api.markdown2pdf.ai" # URL of the markdown2pdf.ai API
+POLL_INTERVAL = 3 # Time in seconds to wait between polling requests
+MAX_DOC_GENERATION_POLLS = 10 # Maximum number of times to wait for a document to be generated before giving up
 
 class AsyncMarkdownPDF:
     def __init__(self, api_url=DEFAULT_API_URL, on_payment_request=None, poll_interval=POLL_INTERVAL):
@@ -21,8 +21,9 @@ class AsyncMarkdownPDF:
         
         if not date:
             dt = datetime.now()
-            date = f"{dt.day} {dt.strftime('%B %Y')}"
+            date = f"{dt.day} {dt.strftime('%B %Y')}" # Nicely formatted today's date
         
+        # Assemble payload for the /markdown endpoint
         payload = {
             "data": {
                 "text_body": markdown,
@@ -40,7 +41,7 @@ class AsyncMarkdownPDF:
             while True:
                 response = await client.post(f"{self.api_url}/v1/markdown", json=payload)
 
-                if response.status_code == 402:
+                if response.status_code == 402: # L402 Payment Required
                     l402_offer = response.json()
                     offer_data = l402_offer["offers"][0]
                     offer = {
@@ -68,7 +69,6 @@ class AsyncMarkdownPDF:
                     if not self.on_payment_request:
                         raise PaymentRequiredException("Payment required but no handler provided.")
                     
-                    # Handle both sync and async payment handlers
                     if inspect.iscoroutinefunction(self.on_payment_request):
                         await self.on_payment_request(offer)
                     else:
@@ -84,7 +84,7 @@ class AsyncMarkdownPDF:
                 path = response_data["path"]
                 break
 
-            # Step 1: Poll until status is "Done"
+            # Request document now payment has been made
             status_url = self._build_url(path)
             attempt = 0
 
@@ -116,7 +116,7 @@ class AsyncMarkdownPDF:
                 raise Markdown2PDFException(f"Polling exceeded max attempts ({MAX_DOC_GENERATION_POLLS}) without completion.")
 
 
-            # Step 3: Download the actual PDF
+            # Download the final PDF
             pdf_resp = await client.get(final_download_url)
             if not pdf_resp.is_success:
                 raise Markdown2PDFException("Failed to download final PDF.")
