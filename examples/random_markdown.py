@@ -69,24 +69,18 @@ Start now.
 
 if __name__ == "__main__":
 
-    for i in range(50):
-        md = generate_random_markdown()
-        print(f"Generated Markdown Content: {md}")
+    md = generate_random_markdown()
+    print(f"Generated Markdown Content: {md}")
 
-        def pay(offer):
-            print("Paying using Alby:")
-            payment = Payment()
-            pay = payment.bolt11_payment(offer["payment_request"])
-            print(f"Payment made: {pay}")
+    def pay(offer):
+        print("Paying using Alby:")
+        payment = Payment()
+        pay = payment.bolt11_payment(offer["payment_request"])
+        print(f"Payment made: {pay}")
 
-        client = MarkdownPDF(on_payment_request=pay)
-        try: 
-            path = client.convert(md, download_path=f"output-{i}.pdf")
-            print("Saved PDF to:", path)
-            with open(f"PASS-random_markdown_{i}.md", "w") as f:
-                f.write(md)
-        except Exception as e:
-            print(f"Error converting markdown to PDF for document {i}: {e}")
-            with open(f"FAIL-random_markdown_{i}.md", "w") as f:
-                f.write(md)
-            continue
+    client = MarkdownPDF(on_payment_request=pay)
+    try: 
+        path = client.convert(md, download_path=f"output.pdf")
+        print("Saved PDF to:", path)
+    except Exception as e:
+        print(f"Error converting markdown to PDF for document: {e}")
