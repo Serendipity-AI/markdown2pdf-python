@@ -35,7 +35,7 @@ class MarkdownPDF:
         }
 
         while True:
-            response = requests.post(f"{self.api_url}/v1/markdown", json=payload)
+            response = requests.post(f"{self.api_url}/markdown", json=payload)
 
             if response.status_code == 402:
                 l402_offer = response.json()
