@@ -40,7 +40,7 @@ def convert(markdown, title="Markdown2PDF.ai converted document", date=None, dow
     with httpx.Client() as client:
         while True:
             print("Sending initial request to convert markdown...")
-            response = client.post(f"{api_url}/v1/markdown", json=payload)
+            response = client.post(f"{api_url}/markdown", json=payload)
 
             if response.status_code == 402:
                 print("Received 402 Payment Required response, fetching payment offer...")
