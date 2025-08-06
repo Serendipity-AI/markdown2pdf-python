@@ -39,7 +39,7 @@ class AsyncMarkdownPDF:
 
         async with httpx.AsyncClient() as client:
             while True:
-                response = await client.post(f"{self.api_url}/v1/markdown", json=payload)
+                response = await client.post(f"{self.api_url}/markdown", json=payload)
 
                 if response.status_code == 402: # L402 Payment Required
                     l402_offer = response.json()
