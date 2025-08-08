@@ -1,3 +1,7 @@
 markdown2pdf.egg-info
 .ds_store
 .env
+markdown2pdf_python.egg-info
+dist
+.venv
+output.pdf

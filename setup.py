@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="markdown2pdf",
-    version="0.1.0",
+    name="markdown2pdf-python",
+    version="0.1.10",
     packages=find_packages(),
     install_requires=["requests"],
     author="Serendipity AI",
-    description="Convert Markdown to PDF with L402 Lightning support, brought to you by markdown2pdf.ai",
+    description="⚡ Python client for markdown2pdf.ai - Convert markdown to PDF with Lightning payments",
     license="MIT",
 )
