@@ -3,7 +3,7 @@ name = "markdown2pdf-python"
 version = "0.2.0"
 description = "⚡ Python client for markdown2pdf.ai - Convert markdown to PDF with Lightning payments"
 authors = [{ name = "Serendipity AI" }]
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 readme = "README.md"
 license = { text = "MIT" }
 dependencies = [
